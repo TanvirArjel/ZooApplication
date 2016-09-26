@@ -1,0 +1,42 @@
+﻿@model ZooApp.Models.AnimalFood
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AnimalFood</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Animal.AnimalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Animal.AnimalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Food.FoodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Food.FoodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodQuantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

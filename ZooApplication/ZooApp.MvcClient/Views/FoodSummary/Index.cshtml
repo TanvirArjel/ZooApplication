@@ -1,0 +1,98 @@
+﻿@model ZooApp.ViewModels.SummaryData
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Daily Food Summary</h2>
+<br/>
+
+<table class="table">
+    <tr>
+        <th>
+            Food Name
+        </th>
+        <th>
+            Food Price
+        </th>
+        <th>
+           Food Quantity
+        </th>
+        <th>
+            Total Price
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model.FoodSummaryViewModels) {
+    string selectedRow = "";
+    if (item.FoodId== ViewBag.FoodId)
+    {
+        selectedRow = "success";
+    }
+
+    <tr class="@selectedRow">
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalFoodQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            <a href="@Url.Action("Index", "FoodSummary", new {id = item.FoodId })">
+                <span style="font-size:16px">Details</span>
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            </a>
+        </td>
+    </tr>    
+}
+    <tr>
+        <td colspan="3"><b>Total Cost:</b></td>
+        <td><b>@ViewBag.TotalCost1</b></td>
+    </tr>
+</table>
+
+@if (Model.FoodSummayByAnimalViewModels != null)
+{
+    <h3>Details for selceted food item</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Animal Name
+            </th>
+            <th>
+                Total Food Quantity
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.FoodSummayByAnimalViewModels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnimalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2"><b>Total Cost:</b></td>
+            <td><b>@ViewBag.TotalCost2</b></td>
+        </tr>
+
+    </table>
+}

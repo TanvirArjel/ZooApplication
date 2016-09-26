@@ -1,0 +1,96 @@
+﻿@using PagedList;
+@using PagedList.Mvc; 
+@model IPagedList<ZooApp.ViewModels.AnimalViewModel>
+
+@{
+    ViewBag.Title = "Animal";
+}
+
+<h2>All Animals</h2>
+<p>
+    @Html.ActionLink("Add New Animal", "Create","", htmlAttributes: new { @class = "btn btn-default" })
+</p>
+
+@using(Html.BeginForm("Index", "Animal", FormMethod.Get, htmlAttributes: new {@class = "form-inline text-center" }))
+{
+    <div class="form-group">
+        
+        @Html.TextBox("searchString", "", htmlAttributes: new { @class = "form-control", placeholder = "Write your search keyword" })
+    </div>
+    <input type="submit" value="Search" class="btn btn-default" />
+}
+
+<br/>
+<table class="table">
+    <tr>
+        <th class="text-center">
+            <a href="@Url.Action("Index", "Animal", new {sortOrder = ViewBag.NameSortParam, searchString = Request["searchString"] })">
+                <span style="font-size:18px">Animal Name</span>
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            </a>             
+        </th>
+        <th class="text-center">
+            <a href="@Url.Action("Index", "Animal", new {sortOrder = ViewBag.OriginSortParam, searchString = Request["searchString"] })">
+                <span style="font-size:18px">Origin</span>
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            </a> 
+        </th>
+        <th class="text-center">
+            <a href="@Url.Action("Index", "Animal", new {sortOrder = ViewBag.QuantitySortParam, searchString = Request["searchString"] })">
+                <span style="font-size:18px">Animal Quantity</span>
+                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            </a> 
+        </th>
+        <th> <span style="font-size:18px; color: #0a0a0a">Actions</span></th>
+    </tr>
+@if (Model.Count() == 0)
+{
+    <tr>
+        <td colspan="3">No item found with given search keyword</td>
+    </tr>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.AnimalName)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Origin)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.AnimalQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+}
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = Request["searchString"] }),
+    new PagedListRenderOptions()
+    {
+        Display = PagedListDisplayMode.IfNeeded,
+        DisplayPageCountAndCurrentLocation = true,
+        DisplayItemSliceAndTotal = true
+    })
+</div>
+
+@section Scripts 
+{
+    @*<script>
+        $(document).ready(function () {
+            //$('#menu-toggle').click(function () {
+            //    $(this).find('i').toggleClass('glyphicon-triangle-bottom').toggleClass('glyphicon-triangle-top');
+            //});
+        });
+    </script>*@
+
+}

@@ -1,0 +1,43 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* unvisited link */
+a:link {
+    color: #0a0a0a;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: #0a0a0a;
+     text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    color: #0a0a0a;
+     text-decoration: none;
+}
+
+/* selected link */
+a:active {
+    color: #0a0a0a;
+     text-decoration: none;
+}
