@@ -27,7 +27,7 @@ namespace ZooApp.ViewModels
         [Required]
         [StringLength(50)]
         [Index("Ix_FoodName", Order = 1, IsUnique = true)]
-        //[Remote("IsFoodNameExist", "Food", ErrorMessage = "Food Name Already Exists")]
+        [Remote("IsFoodNameExist", "Food", ErrorMessage = "Food Name Already Exists")]
         [Display(Name = "Food Name")]
         public string FoodName { get; set; }
         [Display(Name = "Unit Price")]

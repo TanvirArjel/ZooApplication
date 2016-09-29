@@ -42,10 +42,16 @@ namespace ZooApp.MvcClient.Controllers
           return View(food);
         }
 
-        //public JsonResult IsFoodNameExist(string FoodName)
-        //{
-        //    return Json(!db.Foods.Any(x => x.FoodName == FoodName), JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult IsFoodNameExist(string FoodName, int? Id)
+        {
+            var validateName = db.Foods.FirstOrDefault(x => x.FoodName == FoodName && x.Id != Id);
+            if (validateName != null)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public ActionResult Edit(int id)

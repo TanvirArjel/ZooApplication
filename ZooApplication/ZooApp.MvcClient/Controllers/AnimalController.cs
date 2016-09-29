@@ -46,7 +46,19 @@ namespace ZooApp.MvcClient.Controllers
             return View(animal);
         }
 
-       
+       public JsonResult IsAnimalNameExist (string AnimalName, int ? Id)
+        {
+            var validateName = db.Animals.FirstOrDefault(x => x.AnimalName == AnimalName && x.Id != Id);
+            if (validateName != null)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         [HttpGet]
         public ActionResult Edit(int id)

@@ -28,7 +28,7 @@ namespace ZooApp.ViewModels
         [StringLength(50)]
         [Display(Name = "Animal Name")]
         [Index("Ix_AnimalName", Order =1,IsUnique =true)]
-        //[Remote("IsAnimalNameExist", "Animal", ErrorMessage = "Animal Name Already Exists")]
+        [Remote("IsAnimalNameExist", "Animal", AdditionalFields ="Id", ErrorMessage = "Animal Name Already Exists")]
         public string AnimalName { get; set; }
         [Required]
         [StringLength(50)]
