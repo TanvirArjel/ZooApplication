@@ -79,6 +79,21 @@ namespace ZooApp.MvcClient.Controllers
             return View(animal);
                      
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DeleteByCheckBox(List<int> animalsToDelete)
+        {
+            if (animalsToDelete == null)
+            {
+                return RedirectToAction("Index");
+            }
+            List<Animal> deleteAnimals = db.Animals.Where(x => animalsToDelete.Contains(x.Id)).ToList();
+            foreach (Animal animal in deleteAnimals)
+            {
+                db.Animals.Remove(animal);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public ActionResult Delete(int id)

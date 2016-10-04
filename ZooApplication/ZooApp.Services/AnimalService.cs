@@ -56,7 +56,7 @@ namespace ZooApp.Services
                 AnimalQuantity = animal.AnimalQuantity
             });
 
-            return viewAnimals.ToList().ToPagedList(page ?? 1,4);
+            return viewAnimals.ToList().ToPagedList(page ?? 1,6);
         }
 
         public AnimalViewModel GetAnimalById(int id)
